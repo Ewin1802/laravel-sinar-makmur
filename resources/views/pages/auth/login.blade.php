@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Login | Sinar Makmur POS</title>
+    <title>Login | Sinar Makmur</title>
 
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -38,7 +38,7 @@
 
                     <div>
 
-                        <h1>Sinar Makmur POS</h1>
+                        <h1>Kasir Sinar Makmur</h1>
 
                         <p>
                             Modern Point of Sales System

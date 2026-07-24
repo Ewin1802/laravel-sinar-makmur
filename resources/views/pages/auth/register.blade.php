@@ -7,7 +7,7 @@
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Register | Sinar Makmur POS</title>
+    <title>Register | Sinar Makmur</title>
 
     <link rel="stylesheet" href="{{ asset('css/app.css') }}">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
@@ -35,7 +35,7 @@
 
                     <div>
 
-                        <h1>Sinar Makmur POS</h1>
+                        <h1>Kasir Sinar Makmur</h1>
 
                         <p>Modern Point Of Sales</p>
 
