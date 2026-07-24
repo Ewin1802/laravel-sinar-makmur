@@ -90,19 +90,6 @@
 
         </a>
 
-        {{-- Report --}}
-        <a href="#">
-
-            <span class="menu-icon">
-                <i data-lucide="chart-column"></i>
-            </span>
-
-            <span class="menu-title">
-                Laporan
-            </span>
-
-        </a>
-
     </nav>
 
     {{-- Footer --}}
