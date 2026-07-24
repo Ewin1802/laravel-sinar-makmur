@@ -3,7 +3,7 @@
     {{-- Logo --}}
     <div class="logo">
 
-        <h2>SM</h2>
+        <h2>Sinar Makmur</h2>
 
         <span>Point Of Sales</span>
 

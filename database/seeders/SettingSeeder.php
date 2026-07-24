@@ -19,10 +19,10 @@ class SettingSeeder extends Seeder
             'Menyediakan berbagai produk elektronik dan furniture berkualitas.',
 
             'hero_title' =>
-            'Elektronik Berkualitas Untuk Rumah Anda',
+            'Solusi Lengkap Elektronik, Furniture & Bahan Bangunan',
 
             'hero_subtitle' =>
-            'Temukan berbagai kebutuhan elektronik dan furniture dengan harga terbaik.',
+            'Produk berkualitas, harga kompetitif, dan pelayanan terbaik untuk membantu mewujudkan rumah yang nyaman dan modern.',
 
             'hero_button' => 'Belanja Sekarang',
 
