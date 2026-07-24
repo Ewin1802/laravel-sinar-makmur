@@ -11,7 +11,7 @@ class SettingSeeder extends Seeder
     {
         Setting::create([
 
-            'store_name' => 'SM Store',
+            'store_name' => 'Toko Sinar Makmur',
 
             'store_tagline' => 'Furniture & Electronics',
 
@@ -42,17 +42,14 @@ class SettingSeeder extends Seeder
 
             'tiktok' => '#',
 
-            'meta_title' =>
-            'SM Store',
+            'meta_title' => 'toko Sinar Makmur',
 
-            'meta_description' =>
-            'Toko Elektronik dan Furniture',
+            'meta_description' => 'Toko Elektronik, Bahan Bangunan dan Furniture',
 
-            'meta_keywords' =>
-            'elektronik,furniture',
+            'meta_keywords' => 'elektronik,furniture',
 
             'copyright' =>
-            '© '.date('Y').' SM Store'
+            '© '.date('Y').' SinarMakmur'
 
         ]);
     }
