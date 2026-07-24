@@ -1,0 +1,455 @@
+/* ===========================================================
+   NAVBAR
+=========================================================== */
+
+.navbar{
+
+    position: sticky;
+
+    top: 0;
+
+    z-index: 900;
+
+    height: 82px;
+
+    padding: 0 30px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+
+    gap: 24px;
+
+    background: #FFFFFF;
+
+    border-bottom: 1px solid var(--border);
+
+    box-shadow: 0 4px 20px rgba(15,23,42,.04);
+
+}
+
+/* ===========================================================
+   LEFT
+=========================================================== */
+
+.navbar-left{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+    flex-shrink:0;
+
+}
+
+.menu-button{
+
+    width:48px;
+
+    height:48px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+}
+
+.menu-button svg{
+
+    width:22px;
+
+    height:22px;
+
+}
+
+.menu-button:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+}
+
+.navbar-title{
+
+    display:flex;
+
+    flex-direction:column;
+
+    gap:4px;
+
+}
+
+.navbar-title h1{
+
+    margin:0;
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--text);
+
+    line-height:1.2;
+
+}
+
+.navbar-title span{
+
+    font-size:14px;
+
+    color:var(--text-light);
+
+}
+
+/* ===========================================================
+   CENTER
+=========================================================== */
+
+.navbar-center{
+
+    flex:1;
+
+    display:flex;
+
+    justify-content:center;
+
+}
+
+.search-box{
+
+    width:100%;
+
+    max-width:500px;
+
+    height:50px;
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:0 18px;
+
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    border-radius:16px;
+
+    transition:.25s ease;
+
+}
+
+.search-box:focus-within{
+
+    border-color:var(--primary);
+
+    box-shadow:0 0 0 4px rgba(16,185,129,.10);
+
+}
+
+.search-box svg{
+
+    width:20px;
+
+    height:20px;
+
+    color:var(--text-light);
+
+    flex-shrink:0;
+
+}
+
+.search-box input{
+
+    width:100%;
+
+    border:none;
+
+    outline:none;
+
+    background:transparent;
+
+    font-size:15px;
+
+    color:var(--text);
+
+}
+
+.search-box input::placeholder{
+
+    color:var(--text-light);
+
+}
+
+/* ===========================================================
+   RIGHT
+=========================================================== */
+
+.navbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    flex-shrink:0;
+
+}
+
+.icon-button{
+
+    position:relative;
+
+    width:46px;
+
+    height:46px;
+
+    border:none;
+
+    border-radius:14px;
+
+    background:#F8FAFC;
+
+    border:1px solid var(--border);
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    cursor:pointer;
+
+    transition:.25s ease;
+
+}
+
+.icon-button svg{
+
+    width:21px;
+
+    height:21px;
+
+}
+
+.icon-button:hover{
+
+    background:var(--primary);
+
+    color:#fff;
+
+    transform:translateY(-2px);
+
+}
+
+/* ===========================================================
+   PROFILE
+=========================================================== */
+
+.profile{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:14px;
+
+    padding:8px 12px;
+
+    border-radius:16px;
+
+    transition:.25s ease;
+
+    cursor:pointer;
+
+}
+
+.profile:hover{
+
+    background:#F8FAFC;
+
+}
+
+.avatar{
+
+    width:46px;
+
+    height:46px;
+
+    border-radius:50%;
+
+    background:linear-gradient(
+        135deg,
+        #10B981,
+        #047857
+    );
+
+    color:#fff;
+
+    font-size:18px;
+
+    font-weight:700;
+
+    display:flex;
+
+    justify-content:center;
+
+    align-items:center;
+
+    flex-shrink:0;
+
+}
+
+.profile-info{
+
+    display:flex;
+
+    flex-direction:column;
+
+}
+
+.profile-info strong{
+
+    font-size:15px;
+
+    color:var(--text);
+
+    line-height:1.2;
+
+}
+
+.profile-info small{
+
+    margin-top:3px;
+
+    font-size:13px;
+
+    color:var(--text-light);
+
+}
+
+.profile svg{
+
+    width:18px;
+
+    height:18px;
+
+    color:var(--text-light);
+
+}
+
+/* ===========================================================
+   RESPONSIVE
+=========================================================== */
+
+@media (max-width:1200px){
+
+    .search-box{
+
+        max-width:380px;
+
+    }
+
+}
+
+@media (max-width:992px){
+
+    .navbar{
+
+        padding:0 20px;
+
+    }
+
+    .navbar-center{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-width:768px){
+
+    .navbar{
+
+        height:74px;
+
+        padding:0 16px;
+
+    }
+
+    .navbar-title span{
+
+        display:none;
+
+    }
+
+    .navbar-title h1{
+
+        font-size:22px;
+
+    }
+
+    .profile-info{
+
+        display:none;
+
+    }
+
+}
+
+@media (max-width:576px){
+
+    .navbar{
+
+        gap:10px;
+
+    }
+
+    .icon-button{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .menu-button{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+    .avatar{
+
+        width:42px;
+
+        height:42px;
+
+    }
+
+}
