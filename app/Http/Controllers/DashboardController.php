@@ -32,7 +32,7 @@ class DashboardController extends Controller
 
         $todayRevenue = Order::whereRaw("
             DATE($transactionDate)=CURDATE()
-        ")->sum('payment_amount');
+        ")->sum('total');
 
         $todayOrders = Order::whereRaw("
             DATE($transactionDate)=CURDATE()
@@ -42,13 +42,13 @@ class DashboardController extends Controller
             DATE($transactionDate)=CURDATE()
         ")
             ->where('payment_method', 'cash')
-            ->sum('payment_amount');
+            ->sum('total');
 
         $todayTransfer = Order::whereRaw("
             DATE($transactionDate)=CURDATE()
         ")
             ->where('payment_method', 'transfer')
-            ->sum('payment_amount');
+            ->sum('total');
 
         /*
         |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ class DashboardController extends Controller
             YEAR($transactionDate)=YEAR(CURDATE())
             AND
             MONTH($transactionDate)=MONTH(CURDATE())
-        ")->sum('payment_amount');
+        ")->sum('total');
 
         $monthOrders = Order::whereRaw("
             YEAR($transactionDate)=YEAR(CURDATE())
@@ -74,7 +74,7 @@ class DashboardController extends Controller
             MONTH($transactionDate)=MONTH(CURDATE())
         ")
             ->where('payment_method', 'cash')
-            ->sum('payment_amount');
+            ->sum('total');
 
         $monthTransfer = Order::whereRaw("
             YEAR($transactionDate)=YEAR(CURDATE())
@@ -82,7 +82,7 @@ class DashboardController extends Controller
             MONTH($transactionDate)=MONTH(CURDATE())
         ")
             ->where('payment_method', 'transfer')
-            ->sum('payment_amount');
+            ->sum('total');
 
         /*
         |--------------------------------------------------------------------------
@@ -149,7 +149,7 @@ class DashboardController extends Controller
 
         $chart = Order::selectRaw("
                 DATE($transactionDate) as trx_date,
-                SUM(payment_amount) as total
+                SUM(total) as total
             ")
             ->whereRaw("
                 DATE($transactionDate) >= ?
@@ -246,20 +246,14 @@ class DashboardController extends Controller
         |--------------------------------------------------------------------------
         */
 
-        $totalPaymentToday = $todayCash + $todayTransfer;
+        $totalPayment = $monthCash + $monthTransfer;
 
-        $cashPercent = $totalPaymentToday > 0
-            ? round(
-                ($todayCash / $totalPaymentToday) * 100,
-                1
-            )
+       $cashPercent = $totalPayment > 0
+            ? round(($monthCash / $totalPayment) * 100, 1)
             : 0;
 
-        $transferPercent = $totalPaymentToday > 0
-            ? round(
-                ($todayTransfer / $totalPaymentToday) * 100,
-                1
-            )
+        $transferPercent = $totalPayment > 0
+            ? round(($monthTransfer / $totalPayment) * 100, 1)
             : 0;
 
         /*
@@ -324,7 +318,7 @@ class DashboardController extends Controller
                     ->subDays(6)
                     ->toDateString()
             ])
-            ->sum('payment_amount');
+            ->sum('total');
 
         /*
         |--------------------------------------------------------------------------
@@ -339,7 +333,7 @@ class DashboardController extends Controller
                     ->subDays(29)
                     ->toDateString()
             ])
-            ->sum('payment_amount');
+            ->sum('total');
 
         /*
         |--------------------------------------------------------------------------

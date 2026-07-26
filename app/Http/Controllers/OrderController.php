@@ -122,11 +122,11 @@ class OrderController extends Controller
 
             'total_cash'=>(clone $query)
                 ->where('payment_method','cash')
-                ->sum('payment_amount'),
+                ->sum('total'),
 
             'total_transfer'=>(clone $query)
                 ->where('payment_method','transfer')
-                ->sum('payment_amount'),
+                ->sum('total'),
 
             'total_order'=>(clone $query)->count(),
 
@@ -139,7 +139,7 @@ class OrderController extends Controller
         $chartData = (clone $query)
             ->selectRaw("
                 DATE(STR_TO_DATE(transaction_time,'%Y-%m-%dT%H:%i:%s')) as trx_date,
-                SUM(payment_amount) as total
+                SUM(total) as total
             ")
             ->groupBy('trx_date')
             ->orderBy('trx_date')
@@ -166,7 +166,7 @@ class OrderController extends Controller
         if ($startDate && $endDate) {
             $query->whereBetween('created_at', [$startDate, $endDate]);
         }
-        $totalRevenue = $query->sum('payment_amount');
+        $totalRevenue = $query->sum('total');
         $totalDiscount = $query->sum('discount_amount');
         $totalTax = $query->sum('tax');
         $totalServiceCharge = $query->sum('service_charge');
