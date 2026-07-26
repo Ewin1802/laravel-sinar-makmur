@@ -10,15 +10,11 @@
 
     @include('pages.dashboard.partials.statistics')
 
-    <div class="dashboard-bottom">
+    @include('pages.dashboard.partials.chart')
 
-        @include('pages.dashboard.partials.chart')
+    <div class="dashboard-grid-2">
 
-        @include('pages.dashboard.partials.activity')
-
-    </div>
-
-    <div class="dashboard-users">
+        @include('pages.dashboard.partials.products')
 
         @include('pages.dashboard.partials.users')
 

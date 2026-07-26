@@ -1,44 +1,88 @@
-<div class="card">
+<div class="users-card">
 
-    <div class="card-header">
+    <div class="users-header">
 
-        User Terbaru
+        <div>
+
+            <h3>
+
+                Pengguna Terbaru
+
+            </h3>
+
+            <p>
+
+                Daftar pengguna yang baru ditambahkan.
+
+            </p>
+
+        </div>
+
+        <a href="{{ route('users.index') }}" class="users-link">
+
+            Lihat Semua
+
+        </a>
 
     </div>
 
-    <div class="card-body">
+    <div class="users-list">
 
-        <table class="table">
+        @forelse($recentUsers as $user)
+            <div class="user-item">
 
-            <tbody>
+                <div class="user-avatar">
 
-                <tr>
+                    @if ($user->photo)
+                        <img src="{{ asset('storage/' . $user->photo) }}" alt="{{ $user->name }}">
+                    @else
+                        {{ strtoupper(substr($user->name, 0, 1)) }}
+                    @endif
 
-                    <td>Ewin</td>
+                </div>
 
-                    <td>Administrator</td>
+                <div class="user-content">
 
-                </tr>
+                    <div class="user-name">
 
-                <tr>
+                        {{ $user->name }}
 
-                    <td>Mbappe</td>
+                    </div>
 
-                    <td>Operator</td>
+                    <div class="user-email">
 
-                </tr>
+                        {{ $user->email }}
 
-                <tr>
+                    </div>
 
-                    <td>Messi</td>
+                </div>
 
-                    <td>Kasir</td>
+                <div class="user-right">
 
-                </tr>
+                    <span class="user-role">
 
-            </tbody>
+                        {{ ucfirst($user->role ?? 'User') }}
 
-        </table>
+                    </span>
+
+                    <small>
+
+                        {{ $user->created_at->diffForHumans() }}
+
+                    </small>
+
+                </div>
+
+            </div>
+
+        @empty
+
+            <div class="empty-state">
+
+                Belum ada pengguna.
+
+            </div>
+        @endforelse
 
     </div>
 
