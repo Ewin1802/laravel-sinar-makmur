@@ -420,63 +420,72 @@
 
             <div class="section-title">
 
-                <span>
+    <span>
 
-                    PRODUK
+        PRODUK
 
-                </span>
+    </span>
 
-                <h2>
+    <h2>
 
-                    Semua Produk
+        Semua Produk
 
-                </h2>
+    </h2>
 
-                <p>
+    <p>
 
-                    Temukan berbagai kebutuhan elektronik, mebel, dan bahan bangunan berkualitas dengan harga terbaik.
+        Temukan berbagai kebutuhan elektronik, mebel, dan bahan bangunan berkualitas dengan harga terbaik.
 
-                </p>
+    </p>
 
-            </div>
+</div>
 
-            <div class="product-toolbar">
+<div class="product-toolbar">
 
-                <div class="search-wrapper">
+    <div class="search-wrapper">
 
-                    <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="none"
-                        viewBox="0 0 24 24" stroke="currentColor">
+        <svg xmlns="http://www.w3.org/2000/svg"
+            width="22"
+            height="22"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor">
 
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-5.2-5.2M10.8 18a7.2 7.2 0 100-14.4 7.2 7.2 0 000 14.4z" />
+            <path stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="2"
+                d="M21 21l-5.2-5.2M10.8 18a7.2 7.2 0 100-14.4 7.2 7.2 0 000 14.4z"/>
 
-                    </svg>
+        </svg>
 
-                    <input id="productSearch" type="text" placeholder="Cari TV, Kulkas, Sofa, Semen, Cat...">
+        <input
+            id="productSearch"
+            type="text"
+            placeholder="Cari TV, Kulkas, Sofa, Semen, Cat...">
 
-                </div>
+    </div>
 
-                <div class="toolbar-right">
+    <div class="toolbar-right">
 
-                    <div class="total-product">
+        <div class="total-product">
 
-                        <strong id="productCount">
+            <strong id="productCount">
 
-                            {{ $menuProducts->count() }}
+                {{ $menuProducts->count() }}
 
-                        </strong>
+            </strong>
 
-                        <span>
+            <span>
 
-                            Produk
+                Produk
 
-                        </span>
+            </span>
 
-                    </div>
+        </div>
 
-                </div>
+    </div>
 
-            </div>
+</div>
 
 
             <div class="filter-category">
@@ -502,9 +511,8 @@
             <div class="product-grid">
 
                 @foreach ($menuProducts as $product)
-                    <div class="product-card" data-name="{{ strtolower($product->name) }}"
-                        data-category="{{ strtolower($product->category->name ?? '') }}"
-                        data-description="{{ strtolower($product->description ?? '') }}">
+                    <div class="product-card" data-category="{{ $product->category_id }}">
+
                         <div class="product-image">
 
                             @if ($product->image)
@@ -577,23 +585,6 @@
 
                     </div>
                 @endforeach
-
-            </div>
-            <div class="product-empty" style="display:none;">
-
-                <img src="{{ asset('images/not-found.svg') }}">
-
-                <h3>
-
-                    Produk tidak ditemukan
-
-                </h3>
-
-                <p>
-
-                    Coba gunakan kata lain.
-
-                </p>
 
             </div>
 
@@ -886,8 +877,8 @@
 
 
         <!-- =======================================================
-                                                                STORE STATISTIC
-                                                        ======================================================== -->
+                                                STORE STATISTIC
+                                        ======================================================== -->
 
         <section class="statistics">
 
@@ -976,8 +967,8 @@
 
 
         <!-- =======================================================
-                                                                CTA
-                                                        ======================================================== -->
+                                                CTA
+                                        ======================================================== -->
 
         <section class="cta">
 
@@ -1016,8 +1007,8 @@
 
 
         <!-- =======================================================
-                                                                FOOTER
-                                                        ======================================================== -->
+                                                FOOTER
+                                        ======================================================== -->
 
         <footer>
 
@@ -1395,82 +1386,7 @@
 
             };
         </script>
-        <script>
-            document.addEventListener("DOMContentLoaded", () => {
 
-                const search = document.getElementById("productSearch");
-
-                const cards = document.querySelectorAll(".product-card");
-
-                const counter = document.getElementById("productCount");
-
-                function filterProduct() {
-
-                    const keyword = search.value
-
-                        .toLowerCase()
-
-                        .trim();
-
-                    let visible = 0;
-
-                    cards.forEach(card => {
-
-                        const name = card.dataset.name;
-
-                        const category = card.dataset.category;
-
-                        const desc = card.dataset.description;
-
-                        const match =
-
-                            name.includes(keyword)
-
-                            ||
-
-                            category.includes(keyword)
-
-                            ||
-
-                            desc.includes(keyword);
-
-                        if (match) {
-
-                            card.style.display = "block";
-
-                            card.style.opacity = "1";
-
-                            card.style.transform = "translateY(0)";
-
-                            visible++;
-
-                        } else {
-
-                            card.style.display = "none";
-
-                        }
-
-                    });
-
-                    counter.innerHTML = visible;
-                    const empty = document.querySelector(".product-empty");
-
-                    if (visible === 0) {
-
-                        empty.style.display = "block";
-
-                    } else {
-
-                        empty.style.display = "none";
-
-                    }
-
-                }
-
-                search.addEventListener("keyup", filterProduct);
-
-            });
-        </script>
 
 
     </body>

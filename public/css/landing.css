@@ -966,7 +966,139 @@ nav a:hover::after {
 
 }
 
+/* =====================================================
+PRODUCT TOOLBAR
+===================================================== */
 
+.product-toolbar{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+    gap:24px;
+
+    margin:45px 0 30px;
+
+    flex-wrap:wrap;
+
+}
+
+.search-wrapper{
+
+    flex:1;
+
+    min-width:280px;
+
+    position:relative;
+
+}
+
+.search-wrapper svg{
+
+    position:absolute;
+
+    left:22px;
+
+    top:50%;
+
+    transform:translateY(-50%);
+
+    color:#94A3B8;
+
+}
+
+.search-wrapper input{
+
+    width:100%;
+
+    height:62px;
+
+    border:none;
+
+    outline:none;
+
+    background:#ffffff;
+
+    border-radius:18px;
+
+    padding:0 24px 0 60px;
+
+    font-size:15px;
+
+    box-shadow:
+
+        0 15px 45px rgba(0,0,0,.08);
+
+    transition:.25s;
+
+}
+
+.search-wrapper input:focus{
+
+    box-shadow:
+
+        0 0 0 4px rgba(16,185,129,.15),
+
+        0 18px 45px rgba(0,0,0,.08);
+
+}
+
+.toolbar-right{
+
+    display:flex;
+
+    align-items:center;
+
+    gap:18px;
+
+}
+
+.total-product{
+
+    min-width:150px;
+
+    height:62px;
+
+    border-radius:18px;
+
+    background:linear-gradient(135deg,#10B981,#059669);
+
+    color:#ffffff;
+
+    display:flex;
+
+    flex-direction:column;
+
+    justify-content:center;
+
+    align-items:center;
+
+    box-shadow:
+
+        0 20px 45px rgba(16,185,129,.28);
+
+}
+
+.total-product strong{
+
+    font-size:28px;
+
+    font-weight:800;
+
+    line-height:1;
+
+}
+
+.total-product span{
+
+    font-size:13px;
+
+    opacity:.9;
+
+}
 
 /*=====================================================
     FILTER
@@ -1046,7 +1178,10 @@ nav a:hover::after {
 
     border: 1px solid var(--border);
 
-    transition: var(--transition);
+    /* transition: var(--transition); */
+    transition:
+
+        .3s ease;
 
     box-shadow: var(--shadow-sm);
 
@@ -1087,6 +1222,27 @@ nav a:hover::after {
 .product-card:hover img {
 
     transform: scale(1.08);
+
+}
+.product-empty{
+
+    display:none;
+
+    padding:80px 20px;
+
+    text-align:center;
+
+}
+
+.product-empty h3{
+
+    margin-top:20px;
+
+}
+
+.product-empty img{
+
+    width:160px;
 
 }
 
@@ -1828,6 +1984,20 @@ section.show {
 
 @media(max-width:768px) {
 
+    .search-wrapper input{
+
+        height:56px;
+
+        font-size:14px;
+
+    }
+
+    .total-product{
+
+        height:56px;
+
+    }
+
     nav {
 
         display: none;
@@ -2345,6 +2515,28 @@ RESPONSIVE
 =====================================================*/
 
 @media(max-width:992px) {
+
+    .product-toolbar{
+
+        flex-direction:column;
+
+        align-items:stretch;
+
+    }
+
+    .toolbar-right{
+
+        width:100%;
+
+        justify-content:center;
+
+    }
+
+    .total-product{
+
+        width:100%;
+
+    }
 
     .modal-grid {
 
