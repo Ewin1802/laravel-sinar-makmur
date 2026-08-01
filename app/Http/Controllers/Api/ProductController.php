@@ -81,6 +81,7 @@ class ProductController extends Controller
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|in:1,0',
             'is_favorite' => 'required|in:1,0',
+            'base_unit' => 'required|string|max:10',
         ]);
 
         // Simpan data ke database
@@ -91,6 +92,7 @@ class ProductController extends Controller
             'stock' => $request->stock,
             'category_id' => $request->category_id,
             'status' => $request->status,
+            'base_unit' => $request->base_unit,
             'is_favorite' => $request->is_favorite,
         ]);
 
@@ -148,6 +150,7 @@ class ProductController extends Controller
             'stock' => 'required|numeric',
             'category_id' => 'required',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
+            'base_unit' => 'required|string|max:10',
         ]);
 
         // Ambil produk berdasarkan ID
@@ -158,6 +161,7 @@ class ProductController extends Controller
         $product->price = (int) $request->price; // Nilai asli sudah berupa angka tanpa pemisah ribuan
         $product->category_id = $request->category_id;
         $product->stock = $request->stock;
+        $product->base_unit = $request->base_unit;
 
         // Handle upload gambar jika ada
         if ($request->hasFile('image')) {
