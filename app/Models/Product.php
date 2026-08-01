@@ -17,6 +17,7 @@ class Product extends Model
         'stock',
         'status',
         'is_favorite',
+        'base_unit',
         'category_id',
     ];
 

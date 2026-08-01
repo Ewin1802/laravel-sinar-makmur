@@ -53,6 +53,7 @@ class ProductController extends Controller
             'stock'         => 'required|numeric|min:0',
             'status'        => 'required|boolean',
             'is_favorite'   => 'required|boolean',
+            'base_unit' => 'required|string|max:10',
             'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -65,6 +66,7 @@ class ProductController extends Controller
         $product->stock = $request->stock;
         $product->status = $request->status;
         $product->is_favorite = $request->is_favorite;
+        $product->base_unit = $request->base_unit;
 
         // simpan dulu agar mendapatkan ID
         $product->save();
@@ -122,6 +124,7 @@ class ProductController extends Controller
             'stock'         => 'required|numeric|min:0',
             'status'        => 'required|boolean',
             'is_favorite'   => 'required|boolean',
+            'base_unit'     => 'required|string|max:10',
             'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -133,6 +136,7 @@ class ProductController extends Controller
         $product->category_id = $request->category_id;
         $product->stock = $request->stock;
         $product->status = $request->status;
+        $product->base_unit = $request->base_unit;
         $product->is_favorite = $request->is_favorite;
 
         if ($request->hasFile('image')) {

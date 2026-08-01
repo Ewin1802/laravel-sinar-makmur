@@ -88,7 +88,7 @@
             <div class="form-group">
 
                 <label>
-                    Stok
+                    Stok Awal
                     <span class="text-danger">*</span>
                 </label>
 
@@ -96,6 +96,49 @@
                     value="{{ old('stock', $product->stock ?? 0) }}" min="0">
 
                 @error('stock')
+                    <small class="text-danger">{{ $message }}</small>
+                @enderror
+
+            </div>
+
+            {{-- Satuan Dasar --}}
+            <div class="form-group">
+
+                <label>
+                    Satuan Dasar
+                    <span class="text-danger">*</span>
+                </label>
+
+                <select name="base_unit" class="form-control @error('base_unit') is-invalid @enderror">
+
+                    <option value="PCS" @selected(old('base_unit', $product->base_unit ?? 'PCS') == 'PCS')>
+                        PCS (Per Unit)
+                    </option>
+
+                    <option value="GR" @selected(old('base_unit', $product->base_unit ?? '') == 'GR')>
+                        Gram (gr)
+                    </option>
+
+                    <option value="CM" @selected(old('base_unit', $product->base_unit ?? '') == 'CM')>
+                        Sentimeter (cm)
+                    </option>
+
+                    <option value="ML" @selected(old('base_unit', $product->base_unit ?? '') == 'ML')>
+                        Mililiter (ml)
+                    </option>
+
+                </select>
+                <small class="text-muted">
+
+                    Contoh:
+                    PCS = TV, Kulkas, Kursi<br>
+                    GR = Paku, Beras, Gula<br>
+                    CM = Kabel, Selang<br>
+                    ML = Cat, Oli, Cairan
+
+                </small>
+
+                @error('base_unit')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
 
