@@ -81,8 +81,9 @@
                 @error('price')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
-
+                <small class="text-muted">Harga per satuan dasar (untuk ONS: harga per 1 ons)</small>
             </div>
+
 
             {{-- Stok --}}
             <div class="form-group">
@@ -93,11 +94,12 @@
                 </label>
 
                 <input type="number" name="stock" class="form-control @error('stock') is-invalid @enderror"
-                    value="{{ old('stock', $product->stock ?? 0) }}" min="0">
+                    value="{{ old('stock', isset($product) ? (float) $product->stock : 0) }}" min="0" step="0.01">
 
                 @error('stock')
                     <small class="text-danger">{{ $message }}</small>
                 @enderror
+                <small class="text-muted">Dalam satuan dasar (untuk ONS: jumlah ons)</small>
 
             </div>
 
@@ -115,8 +117,8 @@
                         PCS (Per Unit)
                     </option>
 
-                    <option value="GR" @selected(old('base_unit', $product->base_unit ?? '') == 'GR')>
-                        Gram (gr)
+                    <option value="ONS" @selected(old('base_unit', $product->base_unit ?? '') == 'ONS')>
+                        Ons (1 ons = 100 gr)
                     </option>
 
                     <option value="CM" @selected(old('base_unit', $product->base_unit ?? '') == 'CM')>
@@ -129,13 +131,11 @@
 
                 </select>
                 <small class="text-muted">
-
                     Contoh:
                     PCS = TV, Kulkas, Kursi<br>
-                    GR = Paku, Beras, Gula<br>
+                    ONS = Paku, Beras, Gula<br>
                     CM = Kabel, Selang<br>
                     ML = Cat, Oli, Cairan
-
                 </small>
 
                 @error('base_unit')

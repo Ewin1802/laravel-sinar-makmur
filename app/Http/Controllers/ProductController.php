@@ -45,15 +45,20 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
+        if ($request->base_unit === 'PCS' && floor($request->stock) != $request->stock) {
+            return back()
+                ->withErrors(['stock' => 'Stok untuk satuan PCS harus bilangan bulat.'])
+                ->withInput();
+        }
         $request->validate([
             'name'          => 'required|max:255',
             'description'   => 'required',
             'price'         => 'required|numeric|min:0',
             'category_id'   => 'required|exists:categories,id',
-            'stock'         => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0|decimal:0,2',
             'status'        => 'required|boolean',
             'is_favorite'   => 'required|boolean',
-            'base_unit' => 'required|string|max:10',
+            'base_unit'     => 'required|in:PCS,ONS,CM,ML',
             'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
@@ -116,15 +121,20 @@ class ProductController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if ($request->base_unit === 'PCS' && floor($request->stock) != $request->stock) {
+            return back()
+                ->withErrors(['stock' => 'Stok untuk satuan PCS harus bilangan bulat.'])
+                ->withInput();
+        }
         $request->validate([
             'name'          => 'required|max:255',
             'description'   => 'required',
             'price'         => 'required|numeric|min:0',
             'category_id'   => 'required|exists:categories,id',
-            'stock'         => 'required|numeric|min:0',
+            'stock' => 'required|numeric|min:0|decimal:0,2',
             'status'        => 'required|boolean',
             'is_favorite'   => 'required|boolean',
-            'base_unit'     => 'required|string|max:10',
+            'base_unit'     => 'required|in:PCS,ONS,CM,ML',
             'image'         => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 

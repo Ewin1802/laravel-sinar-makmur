@@ -31,6 +31,8 @@ class OrderController extends Controller
             'transaction_time' => 'required',
             'customer_name' => 'nullable|string',
             'order_items' => 'required|array',
+            'order_items.*.id_product' => 'required',
+            'order_items.*.quantity'   => 'required|numeric|gt:0',
         ]);
 
         try {
@@ -114,9 +116,20 @@ class OrderController extends Controller
                         continue;
                     }
 
-                    if ($product->stock < $item['quantity']) {
+                    $qty = round((float) $item['quantity'], 2);
+
+                    // PCS tidak boleh desimal
+                    if ($product->base_unit === 'PCS' && floor($qty) != $qty) {
                         throw new \Exception(
-                            "Stok {$product->name} tidak mencukupi."
+                            "Jumlah {$product->name} harus bilangan bulat."
+                        );
+                    }
+
+                    // tidak boleh melebihi stok
+                    if ($product->stock < $qty) {
+                        throw new \Exception(
+                            "Stok {$product->name} tidak mencukupi. Sisa {$product->stock} "
+                            . strtolower($product->base_unit) . "."
                         );
                     }
 
@@ -124,14 +137,11 @@ class OrderController extends Controller
                         'order_id'      => $order->id,
                         'product_id'    => $item['id_product'],
                         'product_name'  => $product->name,
-                        'quantity'      => $item['quantity'],
+                        'quantity'      => $qty,
                         'price'         => $item['price'],
                     ]);
 
-                    $product->decrement(
-                        'stock',
-                        $item['quantity']
-                    );
+                    $product->decrement('stock', $qty);
                 }
 
                 return response()->json([

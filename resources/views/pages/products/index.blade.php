@@ -4,309 +4,271 @@
 
 @section('content')
 
-<div class="page-header">
+    <div class="page-header">
 
-    <div class="page-header-left">
+        <div class="page-header-left">
 
-        <h2>Produk</h2>
+            <h2>Produk</h2>
 
-        <p>
-            Kelola seluruh produk yang tersedia pada sistem.
-        </p>
+            <p>
+                Kelola seluruh produk yang tersedia pada sistem.
+            </p>
 
-    </div>
+        </div>
 
-    <div class="page-header-right">
+        <div class="page-header-right">
 
-        <a href="{{ route('products.create') }}" class="btn btn-primary">
+            <a href="{{ route('products.create') }}" class="btn btn-primary">
 
-            <i data-lucide="plus"></i>
+                <i data-lucide="plus"></i>
 
-            Tambah Produk
+                Tambah Produk
 
-        </a>
+            </a>
 
-    </div>
-
-</div>
-
-
-<div class="card">
-
-    <div class="card-header">
-
-        <form
-            method="GET"
-            action="{{ route('products.index') }}"
-            class="table-toolbar">
-
-            <div class="search-box">
-
-                <i data-lucide="search"></i>
-
-                <input
-                    type="text"
-                    name="name"
-                    value="{{ request('name') }}"
-                    placeholder="Cari nama produk...">
-
-            </div>
-
-            <button class="btn btn-light">
-
-                <i data-lucide="filter"></i>
-
-                Cari
-
-            </button>
-
-        </form>
+        </div>
 
     </div>
 
 
-    <div class="card-body p-0">
+    <div class="card">
 
-        <div class="table-responsive">
+        <div class="card-header">
 
-            <table class="table">
+            <form method="GET" action="{{ route('products.index') }}" class="table-toolbar">
 
-                <thead>
+                <div class="search-box">
 
-                    <tr>
+                    <i data-lucide="search"></i>
 
-                        <th width="70">Foto</th>
+                    <input type="text" name="name" value="{{ request('name') }}" placeholder="Cari nama produk...">
 
-                        <th>Produk</th>
+                </div>
 
-                        <th>Kategori</th>
+                <button class="btn btn-light">
 
-                        <th class="text-end">Harga</th>
+                    <i data-lucide="filter"></i>
 
-                        <th class="text-center">Stok</th>
+                    Cari
 
-                        <th class="text-center">Status</th>
+                </button>
 
-                        <th class="text-center">Favorite</th>
+            </form>
 
-                        <th width="170" class="text-center">
+        </div>
 
-                            Aksi
 
-                        </th>
+        <div class="card-body p-0">
 
-                    </tr>
+            <div class="table-responsive">
 
-                </thead>
+                <table class="table">
 
-                <tbody>
-
-                    @forelse($products as $product)
+                    <thead>
 
                         <tr>
 
-                            <td>
+                            <th width="70">Foto</th>
 
-                                @if($product->image)
+                            <th>Produk</th>
 
-                                    <img
-                                        src="{{ asset($product->image) }}"
-                                        class="table-image">
+                            <th>Kategori</th>
 
-                                @else
+                            <th class="text-end">Harga</th>
 
-                                    <div class="table-image-placeholder">
+                            <th class="text-center">Stok</th>
 
-                                        <i data-lucide="image"></i>
+                            <th class="text-center">Status</th>
+
+                            <th class="text-center">Favorite</th>
+
+                            <th width="170" class="text-center">
+
+                                Aksi
+
+                            </th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        @forelse($products as $product)
+                            <tr>
+
+                                <td>
+
+                                    @if ($product->image)
+                                        <img src="{{ asset($product->image) }}" class="table-image">
+                                    @else
+                                        <div class="table-image-placeholder">
+
+                                            <i data-lucide="image"></i>
+
+                                        </div>
+                                    @endif
+
+                                </td>
+
+                                <td>
+
+                                    <div class="table-title">
+
+                                        {{ $product->name }}
 
                                     </div>
 
-                                @endif
+                                    <small>
 
-                            </td>
+                                        {{ Str::limit($product->description, 50) }}
 
-                            <td>
+                                    </small>
 
-                                <div class="table-title">
+                                </td>
 
-                                    {{ $product->name }}
+                                <td>
 
-                                </div>
+                                    {{ $product->category_name }}
 
-                                <small>
+                                </td>
 
-                                    {{ Str::limit($product->description,50) }}
+                                <td class="text-end">
+                                    Rp {{ number_format($product->price, 0, ',', '.') }}
+                                    <small class="text-muted">/ {{ strtolower($product->base_unit ?? 'pcs') }}</small>
+                                </td>
 
-                                </small>
+                                <td class="text-center">
 
-                            </td>
+                                    @if ($product->stock > 10)
+                                        <span class="badge badge-success">
 
-                            <td>
+                                            {{ str_replace('.', ',', (float) $product->stock) }} {{ strtolower($product->base_unit ?? 'pcs') }}
 
-                                {{ $product->category_name }}
+                                        </span>
+                                    @elseif($product->stock > 0)
+                                        <span class="badge badge-warning">
 
-                            </td>
+                                            {{ str_replace('.', ',', (float) $product->stock) }} {{ strtolower($product->base_unit ?? 'pcs') }}
 
-                            <td class="text-end">
+                                        </span>
+                                    @else
+                                        <span class="badge badge-danger">
 
-                                Rp {{ number_format($product->price,0,',','.') }}
+                                            Habis
 
-                            </td>
+                                        </span>
+                                    @endif
 
-                            <td class="text-center">
+                                </td>
 
-                                @if($product->stock > 10)
+                                <td class="text-center">
 
-                                    <span class="badge badge-success">
+                                    @if ($product->status)
+                                        <span class="badge badge-success">
 
-                                        {{ $product->stock }}
+                                            Aktif
 
-                                    </span>
+                                        </span>
+                                    @else
+                                        <span class="badge badge-danger">
 
-                                @elseif($product->stock > 0)
+                                            Nonaktif
 
-                                    <span class="badge badge-warning">
+                                        </span>
+                                    @endif
 
-                                        {{ $product->stock }}
+                                </td>
 
-                                    </span>
+                                <td class="text-center">
 
-                                @else
+                                    @if ($product->is_favorite)
+                                        <i data-lucide="heart" class="favorite-icon">
 
-                                    <span class="badge badge-danger">
+                                        </i>
+                                    @else
+                                        -
+                                    @endif
 
-                                        Habis
+                                </td>
 
-                                    </span>
+                                <td>
 
-                                @endif
+                                    <div class="table-action">
 
-                            </td>
+                                        <a href="{{ route('products.edit', $product->id) }}"
+                                            class="btn btn-warning btn-icon">
 
-                            <td class="text-center">
+                                            <i data-lucide="pencil"></i>
 
-                                @if($product->status)
+                                        </a>
 
-                                    <span class="badge badge-success">
+                                        <form action="{{ route('products.destroy', $product->id) }}" method="POST"
+                                            onsubmit="return confirm('Hapus produk ini?')">
 
-                                        Aktif
+                                            @csrf
 
-                                    </span>
+                                            @method('DELETE')
 
-                                @else
+                                            <button class="btn btn-danger btn-icon">
 
-                                    <span class="badge badge-danger">
+                                                <i data-lucide="trash-2"></i>
 
-                                        Nonaktif
+                                            </button>
 
-                                    </span>
+                                        </form>
 
-                                @endif
+                                    </div>
 
-                            </td>
+                                </td>
 
-                            <td class="text-center">
+                            </tr>
 
-                                @if($product->is_favorite)
+                        @empty
 
-                                    <i
-                                        data-lucide="heart"
-                                        class="favorite-icon">
+                            <tr>
 
-                                    </i>
+                                <td colspan="8">
 
-                                @else
+                                    <div class="empty-state">
 
-                                    -
+                                        <i data-lucide="package-search"></i>
 
-                                @endif
+                                        <h4>
 
-                            </td>
+                                            Belum ada produk
 
-                            <td>
+                                        </h4>
 
-                                <div class="table-action">
+                                        <p>
 
-                                    <a
-                                        href="{{ route('products.edit',$product->id) }}"
-                                        class="btn btn-warning btn-icon">
+                                            Tambahkan produk pertama Anda.
 
-                                        <i data-lucide="pencil"></i>
+                                        </p>
 
-                                    </a>
+                                    </div>
 
-                                    <form
-                                        action="{{ route('products.destroy',$product->id) }}"
-                                        method="POST"
-                                        onsubmit="return confirm('Hapus produk ini?')">
+                                </td>
 
-                                        @csrf
+                            </tr>
+                        @endforelse
 
-                                        @method('DELETE')
+                    </tbody>
 
-                                        <button
-                                            class="btn btn-danger btn-icon">
+                </table>
 
-                                            <i data-lucide="trash-2"></i>
-
-                                        </button>
-
-                                    </form>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-                    @empty
-
-                        <tr>
-
-                            <td colspan="8">
-
-                                <div class="empty-state">
-
-                                    <i data-lucide="package-search"></i>
-
-                                    <h4>
-
-                                        Belum ada produk
-
-                                    </h4>
-
-                                    <p>
-
-                                        Tambahkan produk pertama Anda.
-
-                                    </p>
-
-                                </div>
-
-                            </td>
-
-                        </tr>
-
-                    @endforelse
-
-                </tbody>
-
-            </table>
+            </div>
 
         </div>
+
+        @if ($products->hasPages())
+            <div class="card-footer">
+
+                {{ $products->withQueryString()->links() }}
+
+            </div>
+        @endif
 
     </div>
-
-    @if($products->hasPages())
-
-        <div class="card-footer">
-
-            {{ $products->withQueryString()->links() }}
-
-        </div>
-
-    @endif
-
-</div>
 
 @endsection

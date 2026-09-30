@@ -200,7 +200,7 @@
                 </div>
 
                 <div>
-                    <small>Item Terjual</small>
+                    <small>Jenis Barang Terjual</small>
                     <h3>
                         {{ number_format($summary['total_item']) }}
                     </h3>
@@ -315,7 +315,7 @@
 
                         <th>Pembayaran</th>
 
-                        <th>Item</th>
+                        <th>Jenis Barang</th>
 
                         <th>Total</th>
 
@@ -464,7 +464,7 @@
                 },
 
                 options: {
-                    
+
 
                     plugins: {
 

@@ -20,6 +20,9 @@ class Product extends Model
         'base_unit',
         'category_id',
     ];
+    protected $casts = [
+        'stock' => 'float',
+    ];
 
     public function category()
     {

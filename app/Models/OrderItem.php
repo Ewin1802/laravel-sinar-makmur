@@ -16,6 +16,9 @@ class OrderItem extends Model
         'product_name',
         'price'
     ];
+    protected $casts = [
+        'quantity' => 'float',
+    ];
 
     public function product()
     {

@@ -29,7 +29,7 @@ class OrderItemController extends Controller
             'data' => $orderItems
         ], 200);
     }
-    
+
     public function orderSales(Request $request)
     {
         $startDate = $request->input('start_date');
@@ -39,7 +39,10 @@ class OrderItemController extends Controller
         if ($startDate && $endDate) {
             $query->whereBetween(DB::raw('DATE(order_items.created_at)'), [$startDate, $endDate]);
         }
-        $totalProductSold = $query->orderBy('total_quantity', 'desc')->get();
+        $totalProductSold = $query
+            ->withCasts(['total_quantity' => 'float'])
+            ->orderBy('total_quantity', 'desc')
+            ->get();
         return response()->json([
             'status' => 'success',
             'data' => $totalProductSold

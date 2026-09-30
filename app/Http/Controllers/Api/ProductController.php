@@ -76,12 +76,12 @@ class ProductController extends Controller
             'name' => 'required|min:3',
             'description' => 'nullable|string',
             'price' => 'required|integer', // Pastikan validasi mengharuskan integer
-            'stock' => 'required|integer',
+            'stock' => 'required|numeric|min:0|decimal:0,2',
             'category_id' => 'required',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
             'status' => 'required|in:1,0',
             'is_favorite' => 'required|in:1,0',
-            'base_unit' => 'required|string|max:10',
+            'base_unit' => 'required|in:PCS,ONS,CM,ML',
         ]);
 
         // Simpan data ke database
@@ -150,7 +150,7 @@ class ProductController extends Controller
             'stock' => 'required|numeric',
             'category_id' => 'required',
             'image' => 'nullable|image|mimes:png,jpg,jpeg|max:2048',
-            'base_unit' => 'required|string|max:10',
+            'base_unit' => 'required|in:PCS,ONS,CM,ML',
         ]);
 
         // Ambil produk berdasarkan ID

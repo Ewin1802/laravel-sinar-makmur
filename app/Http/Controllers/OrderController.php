@@ -192,13 +192,19 @@ class OrderController extends Controller
         return response()->json([
             'order' => $order,
             'items' => $order->orderItems->map(function ($item) {
+
+                $qty  = (float) $item->quantity;
+                $unit = strtolower($item->product->base_unit ?? 'pcs');
+
                 return [
-                    'product_name' => $item->product->name,
-                    'quantity' => $item->quantity,
-                    'price' => number_format($item->price, 2),
-                    'total' => number_format($item->quantity * $item->price, 2),
+                    'product_name' => $item->product_name
+                        ?? $item->product->name
+                        ?? '-',
+                    'quantity'     => str_replace('.', ',', $qty) . ' ' . $unit, // "0,5 ons"
+                    'price'        => number_format($item->price, 0, ',', '.'),
+                    'total'        => number_format(round($qty * $item->price), 0, ',', '.'),
                 ];
-            })
+            }),
         ]);
     }
 
